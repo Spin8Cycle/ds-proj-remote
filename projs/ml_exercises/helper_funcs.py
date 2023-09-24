@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+
+import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy.ndimage import shift
 
@@ -24,6 +26,10 @@ def custom_info(df):
         info_df.loc[i, "Distinct Values"] = df[i].nunique()
 
     return info_df
+
+
+def category_distribution():
+    return None
 
 
 def plot_single_digit(img, x=28, y=28):
