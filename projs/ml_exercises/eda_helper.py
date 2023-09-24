@@ -7,6 +7,19 @@ from scipy.ndimage import shift
 
 
 def custom_info(df):
+    """
+    Return the data type, Non-Null vs Null count, percentage of missing values and distinct values of each column in a dataframe.
+
+    Parameters
+    ----------
+    df : DataFrame
+        Source DataFrame
+
+    Returns
+    -------
+    info_df : DataFrame
+
+    """
     info_df = pd.DataFrame(
         index=df.columns,
         columns=[
@@ -26,6 +39,44 @@ def custom_info(df):
         info_df.loc[i, "Distinct Values"] = df[i].nunique()
 
     return info_df
+
+
+def category_distribution(df, colnames):
+    """
+    Return the counts and distribution of the df's categorical values.
+
+    Parameters
+    ----------
+    df : DataFrame
+        Source DataFrame
+
+    colnames : list
+        List of column names, that represent categorical values
+
+    Returns
+    -------
+    dist_df : DataFrame
+
+    """
+    try:
+        data = []
+        index_1 = []
+        index_2 = []
+        for n in colnames:
+            vc = df[n].value_counts()
+            vc2 = df[n].value_counts(normalize=True)
+            for i in vc.index:
+                index_1.append(n)
+                index_2.append(i)
+                data.append([vc[i], round(vc2[i] * 100, 2)])
+
+        dist_df = pd.DataFrame(
+            data, index=[index_1, index_2], columns=["Counts", "Distribution, %"]
+        )
+
+        return dist_df
+    except:
+        print("Please check if df or colnames is entered")
 
 
 def category_distribution():
