@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.ndimage import shift
 
 
 def plot_single_digit(img, x=28, y=28):
@@ -17,3 +18,9 @@ def plot_multiple_digits(feature, sample_size=100, figsize=(9, 9)):
         plt.subplot(10, 10, idx + 1)
         plot_single_digit(img)
     plt.subplots_adjust(wspace=0, hspace=0)
+
+
+def image_shift(img, dx, dy):
+    image = img.reshape((28, 28))
+    shifted_image = shift(image, [dy, dx], cval=0, mode="constant")
+    return shifted_image.reshape([-1])
