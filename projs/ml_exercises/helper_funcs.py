@@ -4,6 +4,28 @@ import matplotlib.pyplot as plt
 from scipy.ndimage import shift
 
 
+def custom_info(df):
+    info_df = pd.DataFrame(
+        index=df.columns,
+        columns=[
+            "Data Type",
+            "Non-Null Count",
+            "Null Count",
+            "% Missing",
+            "Distinct Values",
+        ],
+    )
+
+    for i in info_df.index:
+        info_df.loc[i, "Data Type"] = df[i].dtype
+        info_df.loc[i, "Non-Null Count"] = df[i].value_counts().sum()
+        info_df.loc[i, "Null Count"] = df[i].isnull().sum()
+        info_df.loc[i, "% Missing"] = round((df[i].isnull().sum() / len(df)) * 100, 2)
+        info_df.loc[i, "Distinct Values"] = df[i].nunique()
+
+    return info_df
+
+
 def plot_single_digit(img, x=28, y=28):
     """Plot image data"""
 
