@@ -79,10 +79,6 @@ def category_distribution(df, colnames):
         print("Please check if df or colnames is entered")
 
 
-def category_distribution():
-    return None
-
-
 def plot_single_digit(img, x=28, y=28):
     """Plot image data"""
 
