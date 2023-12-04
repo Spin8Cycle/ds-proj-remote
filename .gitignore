@@ -5,3 +5,4 @@ __pycache__/
 *.mmap
 *.tfrecord
 *.tfrecord*
+*datasets/
